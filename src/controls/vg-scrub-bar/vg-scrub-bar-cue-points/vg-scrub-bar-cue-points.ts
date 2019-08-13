@@ -17,8 +17,8 @@ import { Subscription } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     template: `
         <div class="cue-point-container">
-            <span *ngFor="let cp of cuePoints" [style.width]="cp.$$style?.width" [style.left]="cp.$$style?.left"
-                  class="cue-point"></span>
+            <span *ngFor="let cp of cuePoints" [style.background-color]="cp.$$style?.color" [style.width]="cp.$$style?.width" [style.left]="cp.$$style?.left"
+                  class="cue-point"><span [style.background-color]="cp.$$style?.color" class="dotP"></span></span>
         </div>
     `,
     styles: [ `
@@ -98,7 +98,8 @@ export class VgScrubBarCuePoints implements OnInit, OnChanges, OnDestroy, DoChec
 
                 (<any>this.vgCuePoints[ i ]).$$style = {
                     width: percentWidth,
-                    left: position
+                    left: position,
+                    color: JSON.parse(this.vgCuePoints[i].text).color
                 };
 
                 this.cuePoints.push(this.vgCuePoints[ i ]);
